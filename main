@@ -141,7 +141,7 @@ cd ;
 
 sudo cp central.conf /etc/logstash/central.conf;
 
-sudo cp logstash-central.init /etc/init.d/logstash-central;
+sudo cp logstash.init /etc/init.d/logstash-central;
 sudo chmod 0755 /etc/init.d/logstash-central;
 sudo chown root:root /etc/init.d/logstash-central;
 sudo /etc/init.d/logstash-central start;
@@ -165,3 +165,17 @@ cd node-v0.10.12;
 ./configure;
 make;
 make install;
+
+git cone https://github.com/elasticsearch/kibana.git;
+
+cp server.js kibana/server.js;
+
+rm kibana/config.js;
+
+cp config.js kibana/config.js;
+
+cd kibana;
+
+/usr/local/src/node-v0.10.12/out/Release/node server.js > /dev/null &;
+
+

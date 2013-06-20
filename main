@@ -1,0 +1,149 @@
+########################### FIRST, INSTALL JAVA #############################
+
+cd;
+
+sudo yum install java-1.7.0-openjdk;
+
+############################ Then, install TCL ##############################
+
+wget http://prdownloads.sourceforge.net/tcl/tcl8.6.0-src.tar.gz;
+
+gunzip < tcl8.6.0-src.tar.gz | tar xvf - ;
+
+
+cd tcl8.6.0/unix ;
+./configure ;
+make ;
+make test ;
+make install ;
+
+########################## REDIS TIME #####################################
+
+cd ;
+
+sudo mkdir /etc/redis ;
+
+wget http://redis.googlecode.com/files/redis-2.6.13.tar.gz ;
+
+tar xzf redis-2.6.13.tar.gz ;
+
+sudo cp -r redis-2.6.13 /usr/local/bin/redis-2.6.13
+
+cd /usr/local/bin/redis-2.6.13;
+
+sudo make;
+
+sudo make test;
+
+sudo make install;
+
+sudo mkdir /var/log/redis
+
+sudo touch /var/log/redis/redis.log
+cd;
+
+sudo cp 6379.conf /etc/redis/6379.conf;
+
+sudo cp redis.init /etc/init.d/redis;
+
+sudo chmod 0755 /etc/init.d/redis;
+
+sudo chown root:root /etc/init.d/redis;
+
+sudo /etc/init.d/redis start;
+
+cd;
+
+############################## ELASTICSEARCH ###############################################
+
+wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.1.zip;
+
+unzip elasticsearch-0.90.1.zip;
+
+cd elasticsearch-0.90.1/config;
+
+rm -r -f elasticsearch.yml;
+
+cd;
+
+sudo cp elasticsearch.yml elasticsearch-0.90.1/config/elasticsearch.yml;
+
+sudo mkdir /u;
+
+sudo mkdir /u/apps;
+
+cd;
+
+sudo yum install ncurses-devel ncurses;
+
+cd /usr/local/src;
+
+wget http://dpkg.sourcearchive.com/downloads/1.14.25/dpkg_1.14.25.tar.gz;
+
+tar -zxvf dpkg_1.14.25.tar.gz;
+
+cd dpkg-1.14.25;
+
+./configure;
+
+make ;
+
+cd utils;
+
+make install;
+
+cd;
+
+sudo cp -r elasticsearch-0.90.1 /u/apps/elasticsearch;
+
+sudo cp elasticsearch.init /etc/init.d/elasticsearch;
+
+sudo chmod 0755 /etc/init.d/elasticsearch;
+
+sudo chown root:root /etc/init.d/elasticsearch;
+
+sudo /etc/init.d/elasticsearch start;
+
+################################## LOGSTASH ################################################
+
+cd;
+
+sudo mkdir /opt/logstash ;
+
+sudo mkdir /etc/logstash ;
+
+sudo mkdir /var/log/logstash ;
+
+cd /opt/logstash ;
+
+sudo wget https://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar -O logstash.jar ;
+
+
+cd ;
+
+sudo cp central.conf /etc/logstash/central.conf;
+
+sudo cp logstash-central.init /etc/init.d/logstash-central;
+sudo chmod 0755 /etc/init.d/logstash-central;
+sudo chown root:root /etc/init.d/logstash-central;
+sudo /etc/init.d/logstash-central start;
+
+################################ install node ###############################################
+
+cd;
+
+sudo yum install gcc-c++;
+
+sudo yum install openssl-devel;
+
+cd /usr/local/src;
+
+wget http://nodejs.org/dist/node-latest.tar.gz;
+tar zxvf node-latest.tar.gz;
+
+## This will need to be modified depending on the latest version 
+## of node
+cd node-v0.10.12;
+./configure;
+make;
+make install;

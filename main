@@ -4,6 +4,12 @@ cd;
 
 sudo yum install java-1.7.0-openjdk;
 
+############################ Install GCC-C++ and Make ################################
+
+sudo yum install make;
+
+sudo yum install gcc-c++;
+
 ############################ Then, install TCL ##############################
 
 wget http://prdownloads.sourceforge.net/tcl/tcl8.6.0-src.tar.gz;
@@ -29,7 +35,19 @@ tar xzf redis-2.6.13.tar.gz ;
 
 sudo cp -r redis-2.6.13 /usr/local/bin/redis-2.6.13
 
+cd /usr/local/bin/redis-2.6.13/deps/jemalloc;
+
+./configure;
+
+make distclean;
+
+make;
+
+make install;
+
 cd /usr/local/bin/redis-2.6.13;
+
+make distclean;
 
 sudo make;
 
@@ -37,9 +55,9 @@ sudo make test;
 
 sudo make install;
 
-sudo mkdir /var/log/redis
+sudo mkdir /var/log/redis;
 
-sudo touch /var/log/redis/redis.log
+sudo touch /var/log/redis/redis.log;
 cd;
 
 sudo cp 6379.conf /etc/redis/6379.conf;

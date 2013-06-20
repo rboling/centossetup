@@ -1,0 +1,17 @@
+logstash.init instead of logstash-central.init;
+
+make distclean in front of make
+
+cd /usr/local/bin/redis-2.6.13/deps/jemalloc;
+
+./configure
+
+make distclean;
+
+make;
+
+make install;
+
+sudo yum install gcc-c++ before tcl
+
+also, sudo yum install make before tcl
